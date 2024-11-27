@@ -12,32 +12,26 @@
 
 @font-face {
     font-family: 'Crimson-Italic';
-    src: url('/fonts/CrimsonText-Italic.ttf') format('truetype'),
-         url('/fonts/CrimsonText-Italic.woff') format('woff'),
-         url('/fonts/CrimsonText-Italic.woff2') format('woff2');
+    src: url('../fonts/CrimsonText-Italic.woff2') format('woff2'),
+         url('../fonts/CrimsonText-Italic.woff') format('woff');
     font-weight: 400;
     font-style: italic;
-    font-display: swap;
 }
 
 @font-face {
     font-family: 'Crimson-Regular';
-    src: url('/fonts/CrimsonText-Regular.ttf') format('truetype'),
-         url('/fonts/CrimsonText-Regular.woff') format('woff'),
-         url('/fonts/CrimsonText-Regular.woff2') format('woff2');
+    src: url('../fonts/CrimsonText-Regular.woff2') format('woff2'),
+         url('../fonts/CrimsonText-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
-    font-display: swap;
 }
 
 @font-face {
     font-family: 'Crimson-SemiBold';
-    src: url('/fonts/CrimsonText-SemiBold.ttf') format('truetype'),
-         url('/fonts/CrimsonText-SemiBold.woff') format('woff'),
-         url('/fonts/CrimsonText-SemiBold.woff2') format('woff2');
+    src: url('../fonts/CrimsonText-SemiBold.woff2') format('woff2'),
+         url('../fonts/CrimsonText-SemiBold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
-    font-display: swap;
 }
 
 @font-face {
@@ -56,10 +50,10 @@
     --blue-details:#477b9e;
     --gray-details:#666666;
 
-    --main-font:'Crimson-Regular', 'Crimson Text', serif;
-    --main-italic:'Crimson-Italic', 'Crimson Text', serif;
+    --main-font:'Crimson-Regular',sans-serif;
+    --main-italic:'Crimson-Italic',sans-serif;
     --pixel-font:'Mondwest', 'Tiny5', 'Courier New', monospace;
-    --bold-font:'Crimson-SemiBold', 'Crimson Text', serif;
+    --bold-font:'Crimson-SemiBold',sans-serif;
 }
 
 html {
@@ -104,11 +98,6 @@ html, body {
     color: var(--main-color);
 }
 /*ESTILOS TITULARES Y PÁRRAFOS*/
-
-span{
-    font-family: var(--pixel-font);
-}
-
 h1,h2,h3,h4{
     font-family: var(--main-italic);
     color:var(--main-color)
@@ -153,7 +142,9 @@ h4{
     }
 }
 
-
+span{
+    font-family: var(--pixel-font);
+}
 
 strong{
     font-family: var(--bold-font);
