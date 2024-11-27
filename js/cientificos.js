@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
         startX = e.clientX || (e.touches ? e.touches[0].clientX : 0);
         currentX = startX;
         wheel.style.cursor = 'grabbing';
+        
+        // Bloquear el scroll
+        document.body.style.overflow = 'hidden';
     }
 
     function handleMouseMove(e) {
@@ -67,6 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleMouseUp() {
         isDragging = false;
         wheel.style.cursor = 'grab';
+        
+        // Restaurar el scroll
+        document.body.style.overflow = '';
     }
 
     // Event listeners para mouse
