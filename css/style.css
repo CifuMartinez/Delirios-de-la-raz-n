@@ -52,7 +52,7 @@
 
     --main-font:'Crimson-Regular',sans-serif;
     --main-italic:'Crimson-Italic',sans-serif;
-    --pixel-font:'Mondwest','Tiny' serif;
+    --pixel-font:'Mondwest','Tiny',serif;
     --bold-font:'Crimson-SemiBold',sans-serif;
 }
 
