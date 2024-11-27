@@ -1,13 +1,21 @@
 @import "intro.css";
 @import "cientificos.css";
 @import "bento.css";
-@import "legado.css"; 
+@import "legado.css";
 @font-face {
     font-family: 'Mondwest';
     src: url('../fonts/PPMondwest-Regular.woff2') format('woff2'),
          url('../fonts/PPMondwest-Regular.woff') format('woff');
     font-weight: normal;
     font-style: italic;
+	font-display:swap;
+}
+@font-face {
+  @font-face {
+  font-family: 'Tiny'; /* Fuente de Google Fonts */
+  src: url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet');
+  font-display: swap;
+}
 }
 
 @font-face {
@@ -43,7 +51,7 @@
     --gray-details:#666666;
 
     --main-font:'Crimson-Regular',sans-serif;
-    --main-italic:'Crimson-Italic',sans-serif;
+    --main-italic:'Crimson-Italic','Tiny',sans-serif;
     --pixel-font:'Mondwest', serif;
     --bold-font:'Crimson-SemiBold',sans-serif;
 }
