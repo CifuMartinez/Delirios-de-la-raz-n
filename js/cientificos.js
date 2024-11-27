@@ -22,11 +22,77 @@ document.addEventListener('DOMContentLoaded', () => {
         scale: 0.95
     });
 
+    let hasInteracted = false;
+    let mouseAnimation;
+
+    let momentum = 0;
+    let position = 0;
+    let radius = calculateRadius();
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+
+    // Función para detener la animación del mouse
+    function stopMouseAnimation() {
+        if (!hasInteracted) {
+            hasInteracted = true;
+            if (mouseAnimation) {
+                mouseAnimation.stop();
+            }
+        }
+    }
+
+    function handleMouseDown(e) {
+        stopMouseAnimation();
+        
+        isDragging = true;
+        startX = e.clientX || (e.touches ? e.touches[0].clientX : 0);
+        currentX = startX;
+        wheel.style.cursor = 'grabbing';
+    }
+
+    function handleMouseMove(e) {
+        if (!isDragging) return;
+        
+        const x = e.clientX || (e.touches ? e.touches[0].clientX : startX);
+        const deltaX = x - currentX;
+        currentX = x;
+        
+        const sensitivity = window.innerWidth <= 480 ? 0.15 : 0.1;
+        const cardAngle = 360 / cards.length;
+        momentum = deltaX * sensitivity;
+        position += momentum * (cardAngle / 30);
+    }
+
+    function handleMouseUp() {
+        isDragging = false;
+        wheel.style.cursor = 'grab';
+    }
+
+    // Event listeners para mouse
+    wheel.addEventListener('mousedown', handleMouseDown);
+    wheel.addEventListener('mousemove', handleMouseMove);
+    wheel.addEventListener('mouseup', handleMouseUp);
+    wheel.addEventListener('mouseleave', handleMouseUp);
+
+    // Event listeners para touch
+    wheel.addEventListener('touchstart', (e) => {
+        handleMouseDown(e);
+    }, { passive: true });
+
+    wheel.addEventListener('touchmove', (e) => {
+        handleMouseMove(e);
+    }, { passive: true });
+
+    wheel.addEventListener('touchend', () => {
+        handleMouseUp();
+    });
+
     // Timeline para la scientist section
     gsap.timeline({
         scrollTrigger: {
             trigger: ".scientists-section",
-            start: "top center",
+            start: "top bottom",
             toggleActions: "play none none none",
             onEnter: async () => {
                 // 1. Primero hacer visible el título y aplicar typewriter
@@ -57,13 +123,53 @@ document.addEventListener('DOMContentLoaded', () => {
                     ease: "power2.out",
                     onComplete: () => {
                         if (!hasInteracted) {
-                            mouseAnimation.play();
+                            mouseAnimation = lottie.loadAnimation({
+                                container: document.querySelector('.mouse-animation'),
+                                renderer: 'svg',
+                                loop: true,
+                                autoplay: true,
+                                path: 'img/mouse-move/data.json',
+                                assetsPath: 'img/mouse-move/'
+                            });
                         }
                     }
                 }, "<+0.8"); 
             }
         }
     });
+
+    function update() {
+        momentum *= 0.96;
+        
+        const cardAngle = 360 / cards.length;
+        const positionDelta = momentum * 0.2;
+        
+        position += positionDelta;
+
+        if (Math.abs(momentum) < 1) {
+            snapToNearestCard();
+        }
+
+        const currentRotation = position;
+
+        cards.forEach((card, index) => {
+            const angle = (index / cards.length) * 360 + currentRotation;
+            positionCard(card, angle);
+        });
+
+        const wheelIndicator = document.querySelector('.wheel-indicator');
+        if (wheelIndicator) {
+            wheelIndicator.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
+        }
+
+        updateActiveIndicator(currentRotation);
+
+        requestAnimationFrame(update);
+    }
+
+    // Inicializar
+    initializeWheel();
+    update();
 
     // Función typewriter
     function typewriterEffect(element, text, speed = 30) {
@@ -98,13 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
             type();
         });
     }
-
-    let momentum = 0;
-    let position = 0;
-    let radius = calculateRadius();
-    let isDragging = false;
-    let startX = 0;
-    let currentX = 0;
 
     // Calcular radio basado en el viewport
     function calculateRadius() {
@@ -174,38 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function update() {
-        momentum *= 0.96;
-        
-        // Ajustamos la posición para que se mueva en incrementos más definidos
-        const cardAngle = 360 / cards.length;
-        const positionDelta = momentum * 0.2;
-        
-        // Actualizamos la posición
-        position += positionDelta;
-
-        if (Math.abs(momentum) < 1) {
-            snapToNearestCard();
-        }
-
-        const currentRotation = position;
-
-        cards.forEach((card, index) => {
-            const angle = (index / cards.length) * 360 + currentRotation;
-            positionCard(card, angle);
-        });
-
-        // Actualizar la rotación del indicador
-        const wheelIndicator = document.querySelector('.wheel-indicator');
-        if (wheelIndicator) {
-            wheelIndicator.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
-        }
-
-        updateActiveIndicator(currentRotation);
-
-        requestAnimationFrame(update);
-    }
-
     function updateActiveIndicator(currentPosition) {
         const circles = document.querySelectorAll('.indicator-circle');
         const cardAngle = 360 / cards.length;
@@ -249,25 +316,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function handleWheel(e) {
-        // Si el viewport es menor a 480px, no procesar el evento wheel
-        if (window.innerWidth <= 480) {
-            return;
-        }
-
-        e.preventDefault();
-        const cardAngle = 360 / cards.length;
-        const scrollSpeed = 0.02;
-        
-        let newMomentum = e.deltaY * scrollSpeed;
-        
-        if (Math.abs(newMomentum) > 0.1) {
-            momentum += newMomentum * (cardAngle / 30);
-            const maxMomentum = 8;
-            momentum = Math.max(Math.min(momentum, maxMomentum), -maxMomentum);
-        }
-    }
-
     // Manejar resize de ventana
     function handleResize() {
         radius = calculateRadius();
@@ -276,7 +324,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event listeners
     window.addEventListener('resize', debounce(handleResize, 250));
-    wheel.addEventListener('wheel', handleWheel, { passive: false });
 
     // Función debounce para evitar muchas llamadas durante el resize
     function debounce(func, wait) {
@@ -305,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
             firstName: 'J.R',
             lastName: 'Oppenheimer',
             colorClass: 'blue',
-            quote: '"Ahora soy <span>la Muerte</span>, el <span>destructor de mundos</span>"',
+            quote: '"Ahora soy la Muerte, el destructor de mundos"',
             description: '<p>Oppenheimer era un hombre <strong class="blue">profundamente enamorado de la ciencia.</strong></p>' + 
                         '<p>Sin embargo, al ver cómo su trabajo se había convertido en un arma de destrucción masiva, <strong class="blue">experimentó una gran disonancia cognitiva.</strong> Lo que él consideraba como la belleza de la física nuclear se había transformado en una pesadilla.</p>' + 
                         '<p>A medida que se acercaba el final de la guerra, Oppenheimer comenzó a cuestionar si era moralmente <strong class="blue">justificable utilizar un arma tan destructiva,</strong> incluso para acortar el conflicto y salvar vidas. La posibilidad de una carrera armamentista y la amenaza de una <strong class="blue">guerra nuclear global lo aterrorizaban.</strong></p>'
@@ -314,7 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
             firstName: 'Leo',
             lastName: 'Szilard',
             colorClass: 'red',
-            quote: '"La carrera armamentista nuclear es una <span>amenaza existencial</span> para la humanidad"',
+            quote: '"La carrera armamentista nuclear es una amenaza existencial para la humanidad"',
             description: '<p>Uno de los principales impulsores del Proyecto Manhattan, Szilard posteriormente se convirtió en un ferviente defensor del control de las armas nucleares. Su visión pesimista sobre la naturaleza humana y su temor a una guerra nuclear lo llevaron a abogar por la <strong class="red">cooperación internacional en materia de desarme.</strong></p>' +
             '<p>Tras la guerra, Szilard se dedicó a promover el control de las armas nucleares y a fomentar el uso pacífico de la energía atómica. Fundó el Consejo para un Mundo Vivible, una <strong class="red">organización dedicada a reducir la amenaza de las armas nucleares.</strong></p>'
         },
@@ -465,10 +512,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Inicializar
-    initializeWheel();
-    update();
-
     // Añadir después de la declaración de scientistData
     // Inicializar los colores de las cards
     function initializeCardColors() {
@@ -484,148 +527,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Llamar a la función después de definir scientistData
     initializeCardColors();
-
-    function handleMouseDown(e) {
-        isDragging = true;
-        startX = e.clientX || e.touches[0].clientX;
-        currentX = startX;
-        wheel.style.cursor = 'grabbing';
-    }
-
-    function handleMouseMove(e) {
-        if (!isDragging) return;
-        
-        const x = e.clientX || e.touches[0].clientX;
-        const deltaX = x - currentX;
-        currentX = x;
-        
-        // Ajustar la sensibilidad según el tamaño de pantalla
-        const sensitivity = window.innerWidth <= 480 ? 0.15 : 0.1;
-        
-        // Convertir el movimiento horizontal en rotación
-        const cardAngle = 360 / cards.length;
-        momentum = deltaX * sensitivity;
-        position += momentum * (cardAngle / 30);
-    }
-
-    function handleMouseUp() {
-        isDragging = false;
-        wheel.style.cursor = 'grab';
-    }
-
-    // Event listeners para arrastrar
-    wheel.addEventListener('mousedown', handleMouseDown);
-    wheel.addEventListener('mousemove', handleMouseMove);
-    wheel.addEventListener('mouseup', handleMouseUp);
-    wheel.addEventListener('mouseleave', handleMouseUp);
-
-    // Soporte para dispositivos táctiles
-    wheel.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        handleMouseDown(e);
-    }, { passive: false });
-
-    wheel.addEventListener('touchmove', (e) => {
-        e.preventDefault();
-        handleMouseMove(e);
-    }, { passive: false });
-
-    wheel.addEventListener('touchend', handleMouseUp);
-
-    // Configurar animación Lottie
-    const mouseAnimation = lottie.loadAnimation({
-        container: document.querySelector('.mouse-animation'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: 'img/mouse-move/data.json',
-        assetsPath: 'img/mouse-move/'
-    });
-
-    // Función para detectar si es dispositivo móvil
-    const isMobile = () => window.innerWidth <= 768;
-
-    // Detectar rotación de las cards
-    const scientistsGrid = document.querySelector('.scientists-grid');
-    if (scientistsGrid) {
-        let hasInteracted = false;
-        let initialPosition = 0;
-
-        // Para dispositivos móviles
-        if (window.innerWidth <= 480) {
-            let touchStartX = 0;
-            
-            scientistsGrid.addEventListener('touchstart', (e) => {
-                touchStartX = e.touches[0].clientX;
-                handleMouseDown(e);
-            });
-
-            scientistsGrid.addEventListener('touchmove', (e) => {
-                if (!hasInteracted) {
-                    const touchDelta = Math.abs(e.touches[0].clientX - touchStartX);
-                    if (touchDelta > 10) {
-                        hasInteracted = true;
-                        mouseAnimation.stop();
-                    }
-                }
-                handleMouseMove(e);
-            });
-
-            scientistsGrid.addEventListener('touchend', () => {
-                handleMouseUp();
-            });
-        }
-
-        // Para desktop
-        else {
-            // Detectar uso del wheel (scroll) en la grid
-            scientistsGrid.addEventListener('wheel', (e) => {
-                if (!hasInteracted && Math.abs(e.deltaY) > 0) {
-                    hasInteracted = true;
-                    mouseAnimation.stop();
-                }
-            });
-
-            // Detectar arrastre del mouse
-            let isDragging = false;
-            let startX = 0;
-
-            scientistsGrid.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                startX = e.clientX;
-            });
-
-            scientistsGrid.addEventListener('mousemove', (e) => {
-                if (isDragging && !hasInteracted) {
-                    const dragDelta = Math.abs(e.clientX - startX);
-                    if (dragDelta > 10) { // Umbral de arrastre
-                        hasInteracted = true;
-                        mouseAnimation.stop();
-                    }
-                }
-            });
-
-            scientistsGrid.addEventListener('mouseup', () => {
-                isDragging = false;
-            });
-
-            scientistsGrid.addEventListener('mouseleave', () => {
-                isDragging = false;
-            });
-        }
-
-        // Opcional: Reiniciar la animación si se sale de la sección
-        document.addEventListener('scroll', () => {
-            const scientistsSection = document.querySelector('.scientists-section');
-            const rect = scientistsSection.getBoundingClientRect();
-            
-            // Si la sección no está visible
-            if (rect.bottom < 0 || rect.top > window.innerHeight) {
-                hasInteracted = false;
-                mouseAnimation.play();
-            }
-        });
-    }
 
     // Manejar cambios de tamaño de ventana
     window.addEventListener('resize', debounce(() => {

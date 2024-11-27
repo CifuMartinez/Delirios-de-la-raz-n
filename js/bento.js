@@ -1,29 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cajas = document.querySelectorAll('.parent > div');
-    let cajaActiva = null; // Para rastrear la caja actualmente volteada
+    let cajaActiva = null;
+    const bentoSection = document.querySelector('.bento-section');
     
-    // Configuración inicial de las cajas (ocultas)
+    // Configuración inicial
     gsap.set(cajas, {
         opacity: 0,
         y: 100 
     });
 
-    // Animación de entrada con ScrollTrigger
-    gsap.to(cajas, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        stagger: {
-            amount: 0.8 // Tiempo total para que aparezcan todas las cajas
-        },
-        ease: "ease.inOut",
-        scrollTrigger: {
-            trigger: ".bento-section",
-            start: "top center",
-            toggleActions: "play none none none"
+    // Función para manejar el scroll en móvil
+    function handleMobileScroll() {
+        if (window.innerWidth <= 480) {
+            const bentoRect = bentoSection.getBoundingClientRect();
+            
+            // Si la sección está visible
+            if (bentoRect.top <= 0 && bentoRect.bottom >= 0) {
+                bentoSection.style.overflowY = 'auto';
+                document.body.style.overflow = 'hidden';
+            } else {
+                bentoSection.style.overflowY = 'hidden';
+                document.body.style.overflow = '';
+            }
         }
+    }
+
+    // ScrollTrigger para la animación y el scroll móvil
+    ScrollTrigger.create({
+        trigger: ".bento-section",
+        start: "top center",
+        end: "bottom top",
+        onEnter: () => {
+            // Animación de entrada de las cajas
+            gsap.to(cajas, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: {
+                    amount: 0.8
+                },
+                ease: "ease.inOut"
+            });
+            
+            // Manejar scroll móvil
+            handleMobileScroll();
+        },
+        onLeave: handleMobileScroll,
+        onEnterBack: handleMobileScroll,
+        onLeaveBack: handleMobileScroll
     });
-    
+
+    // Event listener para el scroll
+    window.addEventListener('scroll', handleMobileScroll);
+
     cajas.forEach(caja => {
         if (caja.classList.contains('caja2') || 
             caja.classList.contains('caja4') || 
@@ -108,5 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             cajaActiva = null;
         }
+    };
+
+    // Limpiar event listener cuando sea necesario
+    return () => {
+        window.removeEventListener('scroll', handleMobileScroll);
     };
 });

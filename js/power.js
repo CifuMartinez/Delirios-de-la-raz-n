@@ -106,30 +106,23 @@ const sketch1 = (p) => {
     p.draw = () => {
         p.background(0);
         
-        // Ajustar tamaño del texto según el ancho del canvas
         let messageSize = p.width <= 480 ? 20 : 24;
         
-        // Mostrar mensaje inicial si showMessage es true
         if (showMessage) {
             if (fonts[0]) {
                 p.noStroke();
                 
-                // Primera línea con Crimson
                 p.textFont(fonts[0]);
                 p.fill("#f3efdd");
                 p.textSize(messageSize);
-                p.text("Recorre la caja", p.width/2, p.height/2 - messageSize/1.5);
+                p.text("Haz click en la caja", p.width/2, p.height/2 - messageSize/1.5);
                 
-                // Segunda línea con Mondwest
                 p.textFont(fonts[1]);
                 p.fill("#cd1613");
                 p.textSize(messageSize - 1);
                 p.text("Cuidado con las bombas", p.width/2, p.height/2 + messageSize/1.5);
             }
-        }
-        
-        // Dibujar los bloques solo si no se muestra el mensaje o si el mouse está sobre el canvas
-        if (!showMessage || p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
+        } else {
             for (let i = 0; i < cols; i++) {
                 for (let j = 0; j < rows; j++) {
                     blocks[i][j].move(p);
@@ -137,8 +130,9 @@ const sketch1 = (p) => {
                 }
             }
         }
-        
-        // Ocultar mensaje cuando el mouse está sobre el canvas
+    };
+
+    p.mousePressed = () => {
         if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
             showMessage = false;
         }

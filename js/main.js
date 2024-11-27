@@ -356,7 +356,7 @@ function createTransitionOverlay() {
         pointer-events: none;
         transition: opacity 0.2s ease-out;
     `;
-    
+
     // CARGA MENU ANIMACIÓN
     // Crear contenedor para la animación Lottie
     const lottieContainer = document.createElement('div');
