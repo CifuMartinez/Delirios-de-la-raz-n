@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Los delirios de la razón</title>
+    <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+</head>
+<body>
+    <div class="floating-menu">
+        <div class="menu-items">
+            <a href="#inicio" class="menu-item active">01. Inicio</a>
+            <a href="#jugar" class="menu-item">02. Jugar a ser dios</a>
+            <a href="#peso" class="menu-item">03. El peso de la creación</a>
+            <a href="#dilemas" class="menu-item">04. Dilemas éticos</a>
+            <a href="#destruccion" class="menu-item">05. Destrucción/creación</a>
+        </div>
+        <div class="menu-toggle">
+            <img src="img/flecha menu.svg" alt="Toggle menu" class="toggle-arrow" draggable="false">
+        </div>
+    </div>
+    
+    <header id="inicio">
+        <div class="sequence-container">
+            <!-- Las imágenes se cargarán dinámicamente -->
+        </div>
+        <div class="overlay"></div>
+        <div class="titular">
+            <h1>Los del<span>irios</span> de la <span>rázon</span></h1>
+            <hr class="linea-separadora"></hr>
+            <p class="subtitular"> Genios y demonios <br>en la ciencia moderna</p>
+        </div>
+    </header>
+    <main>
+        <!-- Quote Section -->
+        <section id="jugar" class="quote-section">
+            <div class="quote-container">
+                <div class="quote-header">
+                    <div class="icon-container">
+                        <div class="face-sequence-container"></div>
+                    </div>
+                    <div class="title-container">
+                        <h2 class="white">Jugar a ser <span>dios</span></h2>
+                    </div>
+                </div>
+                <div class="quote-content">
+                    <p class="texto-cita-pequeña">"Porque nunca sabemos lo que viene después del mal [...] Y muchas veces las cosas más letales, aquellas que poseen el poder suficiente para destruirnos, pueden ser, con el paso del tiempo, los instrumentos de nuestra salvación."</p>
+                    <p class="autor-cita-pequeña green">John <span>von Neumann</span></p>
+                </div>
+            </div>
+        </section>
+        
+
+        <!-- Horizontal Scroll Section -->
+        <section class="container">
+                <!-- Panel 01/03 -->
+                <article class="panel">
+                    <div class="content-grid">
+                        <div class="panel-content">
+                            <div class="text-content">
+                                <p class="chapter-number"><span class="red">01</span>/03</p>
+                                <h3 class="panel-title">Destructor de <span class="red">mundos</span></h3>
+                                <div class="panel-text">
+                                    <p class="texto-grande">La bomba atómica fue concebida como un arma para acelerar 
+                                    el fin de la Segunda Guerra Mundial, pero sus consecuencias 
+                                    trascendieron el conflicto bélico, convirtiéndose
+                                    <span class="red">en un símbolo de poder y destrucción</span>, 
+                                    y planteando interrogantes éticos sobre el uso de la ciencia 
+                                    para fines bélicos.</p>
+                                 
+                                    <p class="texto-grande"> <span class="red">La exclavización de la razón. </span>La única forma de evitar una guerra entre la URSS y EEUU era acumular una cantidad inmensa de bombas para en el caso de cualquier ataque supondría la aniquilación de ambos.</p>
+                                </div>
+                            </div>
+                            <div class="image-container">
+                                <div id="canvasContainer1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                    <!-- Panel 02/03 -->
+                    <article class="panel">
+                        <div class="content-grid">
+                            <div class="panel-content">
+                                <div class="text-content">
+                                    <p class="chapter-number"><span class="green">02</span>/03</p>
+                                    <h3 class="panel-title">La <span class="green">máquina</span> del juicio<span class="green"> final</span></h3>
+                                    <div class="panel-text">
+                                        <p class="texto-grande" >La creación de la <span class="green">MANIAC,</span> una de las primeras computadoras electrónicas,  se convirtió en una <span class="green">herramienta indispensable para el diseño de la bomba H.</span> Los científicos utilizaron esta máquina para simular las reacciones de fusión nuclear. Gracias a los cálculos realizados por la MANIAC, se pudo optimizar el diseño de la bomba H, <span class="green">garantizando su eficiencia y poder destructivo.</span>
+                                        </p>
+                                        
+                                        <p class="texto-grande">Jonh von Neumann, su creador, introdujo un gran cáculo termonuclear en la computadora. La operación corrió 24h al día durante dos meses para arrojar <span class="green">una sola respuesta: SI o NO.</span></p>
+                                    </div>
+                                </div>
+                                <div class="image-container">
+                                    <div id="canvasContainer"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Panel 03/03 -->
+                     <article class="panel">
+                        <div class="content-grid">
+                            <div class="panel-content">
+                                <div class="text-content">
+                                    <p class="chapter-number"><span class="blue">03</span>/03</p>
+                                    <h3 class="panel-title">Bomba <span class="blue">h:</span> <br> Un saber que <span class="blue">aniquila</span> </h3>
+                                    <div class="panel-text">
+                                        <p class="texto-grande">Un instrumento del mal, un arma que se alejaba tanto de lo razonable que era como si los científicos hubieran <span class="blue">descendido voluntariamente las zonas más oscuras del infierno.</span></p>
+
+                                        <p class="texto-grande">Si los físicos ya habían conocido el pecado con la bomba de higrógeno <span class="blue">supieron lo que era la perdición.</span></p>
+                                    
+                                    </div>
+                                </div>
+                                <div class="data-container">
+                                    <div class="data-bullets">
+                                        <div class="bullet active"></div>
+                                        <div class="bullet"></div>
+                                        <div class="bullet"></div>
+                                        <div class="bullet"></div>
+                                        <div class="bullet"></div>
+                                    </div>
+                                    <div class="data-item">
+                                        <span class="number">500</span>
+                                        <p class="texto-pequeño">veces mayor que la <strong class="blue">fuerza de la bomba atómica</strong> que masacró a 250.000 personas en Japón</p>
+                                    </div>
+                                    <div class="data-item">
+                                        <div class="icon-wrapper">
+                                            <img src="img/edificio-bomba.svg" alt="edificio">
+                                        </div>
+                                        <p class="texto-pequeño">Un gigantesto tanque de metal, de <strong class="blue">tres pisos de altura y 82 toneladas de peso</strong></p>
+                                    </div>
+                                    <div class="data-item">
+                                        <span class="number">80M</span>
+                                        <p class="texto-pequeño"><strong class="blue">toneladas de coral</strong> quedaron reducidas a polvo en la isla Elugelab, dejando un <strong class="blue">cráter de 16 pisos de profundidad</strong></p>
+                                    </div>
+                                    <div class="data-item">
+                                        <div class="icon-wrapper bomba-montana">
+                                            <img src="img/bomba-montaña.svg" alt="montaña">
+                                        </div>
+                                        <p class="texto-pequeño">Al explotar creó una enorme nube con forma de hongo que <strong class="blue">se elevó hasta la estraosfera</strong> y continuó creciendo hasta ser <strong class="blue">cinco veces mayor que el Everest</strong></p>
+                                    </div>
+                                    <div class="data-item">
+                                        <span class="number">160M</span>
+                                        <p class="texto-pequeño"><strong class="blue">de grados Celsius</strong> alcanzó la bola de fuego al expandiese. Más caliente que el <strong class="blue">nucleo del sol</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+            
+        </section>
+        <!-- Scientists Section -->
+        <section id="peso" class="scientists-section">
+            <div class="central-text">
+                <h2 class="panel-title">El <span class="highlight">peso</span> de la creación</h2>
+                <div class="panel-text">
+                    <p class="texto-grande">Los laboratorios, otrora santuarios de la curiosidad y la búsqueda de la verdad, se transformaron en <strong>campos de batalla internos</strong>.</p>
+                    <p class="texto-grande">La creación de armas de destrucción masiva puso a prueba <strong>los límites de la conciencia</strong>, obligando a los científicos a confrontar la dualidad del conocimiento: <strong>la capacidad de curar y de aniquilar, de construir y de destruir</strong>.</p>
+                    <div class="indicaciones-container">
+                        <div class="indicaciones-wrapper">
+                            <div class="mouse-animation"></div>
+                            <p class="indicaciones">Muévete/haz scroll entre los científicos y entra para conocer más sobre sus reflexiones.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scientists-grid">
+                <div class="scientist-card">
+                    <img src="./img/James Frank.jpg" alt="Científico" class="image-normal">
+                    <img src="./img/James Frank_hover.jpg" alt="Científico" class="image-hover">
+                    <h4 class="scientist-name">James <span class="highlight">Frank</span></h4>
+                </div>
+                <div class="scientist-card">
+                    <img src="./img/oppenheimer.jpg" alt="Científico" class="image-normal">
+                    <img src="./img/oppenheimer_hover.jpg" alt="Científico" class="image-hover">
+                    <h4 class="scientist-name">J.R Oppenheimer</h4>
+                </div>
+                <div class="scientist-card">
+                    <img src="./img/Leo Szilard.png" alt="Científico" class="image-normal">
+                    <img src="./img/Leo Szilard_hover.png" alt="Científico" class="image-hover">
+                    <h4 class="scientist-name">Leo <span class="highlight">Szilard</span></h4>
+                </div>
+                <div class="scientist-card">
+                    <img src="./img/Einstein.jpg" alt="Científico" class="image-normal">
+                    <img src="./img/Einstein_hover.jpg" alt="Científico" class="image-hover">
+                    <h4 class="scientist-name">Albert <span class="highlight">Einstein</span></h4>
+                </div>
+                <div class="scientist-card">
+                    <img src="./img/Rychard Feynman.jpg" alt="Científico" class="image-normal">
+                    <img src="./img/Rychard Feynman_hover.jpg" alt="Científico" class="image-hover">
+                    <h4 class="scientist-name">Rychard <span class="highlight">Feynman</span></h4>
+                </div>
+                <div class="scientist-card">
+                    <img src="./img/Enrico Fermi.webp" alt="Científico" class="image-normal">
+                    <img src="./img/Enrico Fermi_hover.jpg" alt="Científico" class="image-hover">
+                    <h4 class="scientist-name">Enrico <span class="highlight">Fermi</span></h4>
+                </div>
+                <div class="wheel-indicator">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="indicator-circle" cx="50" cy="10" r="4"/>
+                        <circle class="indicator-circle" cx="80" cy="30" r="4"/>
+                        <circle class="indicator-circle" cx="80" cy="70" r="4"/>
+                        <circle class="indicator-circle" cx="50" cy="90" r="4"/>
+                        <circle class="indicator-circle" cx="20" cy="70" r="4"/>
+                        <circle class="indicator-circle" cx="20" cy="30" r="4"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Añadir después del div .scientists-grid -->
+            <video class="background-video" playsinline muted loop>
+                <source src="./img/Fractal noise.mp4" type="video/mp4">
+            </video>
+
+            <!-- Añadir esto después del scientists-grid -->
+            <div class="scientist-modal" style="display: none;">
+                <button class="close-modal">X</button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img class="modal-img" src="" alt="Científico">
+                        <div class="nombre-quote">
+                            <h3 class="modal-name"></h3>
+                            <p class="quote-text texto-cita-pequeña"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-description texto-grande"></div>
+                    <div class="modal-navigation">
+                        <div class="nav-prev">
+                            <h4 class="nav-arrow">‹</h4>
+                            <h4 class="prev-name"></h4>
+                        </div>
+                        <div class="nav-next">
+                            <h4 class="next-name"></h4>
+                            <h4 class="nav-arrow">›</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bento Section -->
+        <section id="dilemas" class="bento-section">
+            <div class="parent">
+                <div class="caja1">
+                    <div class="card-inner">
+                        <!-- Cara frontal -->
+                        <div class="card-front">
+                            <div class="caja-container">
+                                <div class="quote-image-container">
+                                    <div class="quote-mark">
+                                        <img src="./img/comillas.svg" alt="comillas">
+                                    </div>
+                                    <div class="author-image">
+                                        <img src="./img/Hannah Arendt.jpg" alt="hannah-arendt">
+                                    </div>
+                                </div>
+                                <p class="texto-cita-pequeña white">Hannah Arendt y la <span>banalidad del mal</span></p>
+                            </div>
+                        </div>
+                        <!-- Cara trasera -->
+                        <div class="card-back">
+                            <div class="scroll-container">
+                            <p class="red">
+                                Hannah Arendt acuñó el término <strong>"banalidad del mal"</strong> al analizar el juicio de Adolf Eichmann, uno de los principales organizadores del Holocausto. Argumentó que el mal no siempre es el resultado de una <strong>ideología extrema o una perversidad innata,</strong> puede surgir de la obediencia ciega a la autoridad.
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="caja2">
+                    <div class="caja2-text">
+                        <p class="texto-cita-pequeña"><span>Armas autónomas</span></p>
+                    </div>
+                    <div class="caja2-animation">
+                        <video class="world-machine-video" muted playsinline preload="auto">
+                            <source src="./img/world-machine.mp4" type="video/mp4">
+                            <source src="./img/world-machine.webm" type="video/webm">
+                            <!-- Mensaje de fallback -->
+                            Tu navegador no soporta el elemento de video.
+                        </video>
+                    </div>
+                </div>
+                <div class="caja3">
+                    <div class="card-inner">
+                        <!-- Cara frontal -->
+                        <div class="card-front">
+                            <div class="caja-container">
+                                <div class="quote-image-container">
+                                    <div class="quote-mark">
+                                        <img src="./img/comillas.svg" alt="comillas">
+                                    </div>
+                                    <div class="author-image">
+                                        <img src="./img/Einstein-bento.jpg" alt="Einstein-bento">
+                                    </div>
+                                </div>
+                                <p class="texto-cita-pequeña white">Einstein y la <span>responsabilidad</span> social del <span>científico</span></p>
+                            </div>
+                        </div>
+                        <!-- Cara trasera -->
+                        <div class="card-back">
+                            <div class="scroll-container">
+                                <p class="black">
+                                    Einstein creía firmemente que la ciencia debía estar <strong>al servicio de la humanidad.</strong> Abogaba por un uso de la ciencia que beneficiara a toda la sociedad y no solo a unos pocos.  El científico, según Einstein, no debía limitarse a su laboratorio, sino que debía <strong>involucrarse en los debates públicos </strong>sobre los grandes problemas de su tiempo.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="caja4">
+                    <div class="background-image">
+                        <img class="ego-image" src="./img/Ego-bento.jpg" alt="ego">
+                    </div>
+                    <div class="content-overlay">
+                        <p class="texto-cita-pequeña white"><span>Ego</span> </p>
+                    </div>
+                    <div class="caja4-animation">
+                        <video class="pm-video" muted playsinline preload="auto">
+                            <source src="./img/PM.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="caja5">
+                    <div class="card-inner">
+                        <!-- Cara frontal -->
+                        <div class="card-front">
+                            <div class="caja-container">
+                                <p class="texto-cita-pequeña green">La naturaleza</p>
+                                <div class="texto-tachado">
+                                    <p class="texto-cita-pequeña green">del <span>bien mal</span></p>
+                                    <div class="tachado">
+                                        <img src="./img/tachado.svg" alt="tachado">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Cara trasera -->
+                        <div class="card-back">
+                            <div class="scroll-container">
+                                <p class="texto-grande green">
+                                    ¿La ciencia es intrínsecamente buena o mala? ¿Es una <strong>herramienta neutral</strong> que puede ser utilizada para fines buenos o malos, o su propia naturaleza la predispone hacia uno u otro? 
+                                </p>
+                                <p class="green">
+                                    ¿Es aceptable utilizar <strong>medios moralmente cuestionables </strong>para alcanzar un objetivo considerado bueno, como poner fin a una guerra?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="caja6">
+                    <div class="card-inner">
+                        <!-- Cara frontal -->
+                        <div class="card-front">
+                            <div class="caja-container">
+                                <p class="texto-cita-pequeña white">Cono<span>cimiento</span></p>
+                                <div class="linea-vertical"></div>
+                                <p class="texto-cita-pequeña white">huma<span>nidad</span></p>
+                            </div>
+                        </div>
+                        <!-- Cara trasera -->
+                        <div class="card-back">
+                            <div class="scroll-container">
+                                <p class="white">
+                                    ¿Hasta dónde deben llegar los científicos en su <strong>búsqueda del conocimiento?</strong> ¿Cuál es su responsabilidad ante las <strong>consecuencias</strong> de sus descubrimientos?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="caja7">
+                    <div class="background-image">
+                        <img src="./img/religion_bento.jpg" alt="religion-bento" class="religion-image">
+                    </div>
+                    <div class="content-overlay">
+                        <p class="texto-cita-pequeña white"><span>Religión</span></p>
+                    </div>
+                    <div class="caja7-animation">
+                        <video class="dogma-video" muted playsinline preload="auto">
+                            <source src="./img/dogma.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="caja8">
+                    <div class="content-overlay">
+                        <p class="texto-cita-pequeña white">Subordinación <br><span>tecnológica</span></p>
+                    </div>
+                    <div class="caja8-animation">
+                        <video class="error-video" muted playsinline preload="auto">
+                            <source src="./img/error.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legado Section -->
+        <section id="destruccion" class="legado-section">
+            <div class="content-wrapper">
+                <div class="header-wrap">
+                    <h2 class="white">De la destrucción<br>a la creación</h2>
+                    <p class="texto-grande">Aunque los descubrimientos relacionados con la bomba atómica y la bomba de hidrógeno se asocian principalmente con eventos devastadores como las explosiones nucleares, estos avances científicos también han tenido un impacto significativo en áreas más pacíficas y beneficiosas para la humanidad.</p>
+                </div>
+                
+                <div class="tabs-container">
+                    <!-- Tab Arquitectura - Abierto por defecto -->
+                    <div class="tab active">
+                        <div class="tab-content-grid">
+                            <!-- Columna 1: Título -->
+                            <div class="title-column">
+                                <p class="texto-cita-pequeña white">Arquitectura de <span>von Neumann</span></p>
+                                <div class="subtabs">
+                                    <div class="subtab gray"><span>{ . }</span> Computación actual</div>
+                                    <div class="subtab gray"><span>{ . }</span> Software</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Columna 2: Primer bloque de texto -->
+                             <div class="text-column">
+                            <p class="texto-pequeño">
+                                El diseño de la MANIAC, concebido por von Neumann, sentó las bases de la arquitectura de las computadoras modernas. Esta arquitectura se caracteriza por la separación entre la unidad de procesamiento y la memoria, y la capacidad de almacenar tanto datos como instrucciones en la misma
+                                memoria.
+                            </p>
+                                <p class="texto-pequeño">   
+                                 La MANIAC demostró el poder de las computadoras para realizar cálculos complejos y simulaciones. Esta capacidad ha sido fundamental en el desarrollo de campos como la meteorología, la ingeniería, la física y la biología.
+                            </p>
+                        </div>
+                        
+                            <!-- Columna 3: Botón expandir -->
+                            <div class="expand-column">
+                                <div class="reduce-btn">[-]</div>
+                                <div class="expand-btn">[+]</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab Inteligencia artificial -->
+                    <div class="tab">
+                        <div class="tab-content-grid">
+                            <!-- Columna 1: Título -->
+                            <div class="title-column">
+                                <p class="texto-cita-pequeña white">Inteligencia <span>artificial</span></p>
+                                <div class="subtabs">
+                                    <div class="subtab gray"><span>{ . }</span> Deep learning</div>
+                                    <div class="subtab gray"><span>{ . }</span> Aprendizaje automático</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Columna 2: Primer bloque de texto -->
+                            <div class="text-column">
+                                <p class="texto-pequeño">
+                                    Los primeros pasos hacia la inteligencia artificial se dieron con máquinas como la MANIAC. La capacidad de las computadoras para aprender y tomar decisiones basadas en datos ha evolucionado exponencialmente desde entonces, dando lugar a tecnologías como el aprendizaje automático y el deep learning, que están transformando numerosos sectores.
+                                </p>
+                                <p class="texto-pequeño">   
+                                    La programación de la MANIAC requirió el desarrollo de nuevos lenguajes y técnicas de programación. Estos avances sentaron las bases para el desarrollo de los lenguajes de programación modernos y los sistemas operativos.
+                                </p>
+                            </div>
+                            
+                            <!-- Columna 3: Botones expandir/reducir -->
+                            <div class="expand-column">
+                                <div class="reduce-btn">[-]</div>
+                                <div class="expand-btn">[+]</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab Medicina Nuclear -->
+                    <div class="tab">
+                        <div class="tab-content-grid">
+                            <!-- Columna 1: Título -->
+                            <div class="title-column">
+                                <p class="texto-cita-pequeña white">Medicina <span>nuclear</span></p>
+                                <div class="subtabs">
+                                    <div class="subtab gray"><span>{ . }</span> Alta sensibilidad</div>
+                                    <div class="subtab gray"><span>{ . }</span> Evolución de los organos</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Columna 2: Primer bloque de texto -->
+                            <div class="text-column">
+                                <p class="texto-pequeño">
+                                    Los isótopos radiactivos producidos en reactores nucleares se utilizan en una amplia gama de aplicaciones médicas, como el diagnóstico y tratamiento del cáncer. Gracias a la técnica de utilización de radiofármacos para emitir rayos gamma son capaces de obtener imagenes en alta resolución de los órganos y los tejidos.
+                                </p>
+                                <p class="texto-pequeño">   
+                                    Con la medicina nuclear se pueden detectar enfermedades en etapas muy tempranas, sus procedimientos no son invasivos y evitan la cirugía, convirtiendose así en una herramienta invaluable en la práctica médica moderna. </p>
+                            </div>
+                            
+                            <!-- Columna 3: Botones expandir/reducir -->
+                            <div class="expand-column">
+                                <div class="reduce-btn">[-]</div>
+                                <div class="expand-btn">[+]</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab Exploración espacial -->
+                    <div class="tab">
+                        <div class="tab-content-grid">
+                            <!-- Columna 1: Título -->
+                            <div class="title-column">
+                                <p class="texto-cita-pequeña white">Exploración <span>espacial</span></p>
+                                <div class="subtabs">
+                                    <div class="subtab gray"><span>{ . }</span> Sistema de propulsión</div>
+                                    <div class="subtab gray"><span>{ . }</span> Energía larga duración</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Columna 2: Primer bloque de texto -->
+                            <div class="text-column">
+                                <p class="texto-pequeño">
+                                    Los sistemas de propulsión nuclear ofrecen una densidad energética mucho mayor que los combustibles químicos tradicionales, <strong>lo que permite alcanzar velocidades más altas y reducir significativamente el tiempo de viaje</strong> a destinos lejanos como Marte o más allá.
+                                </p>
+                                <p class="texto-pequeño">   
+                                    La energía nuclear puede proporcionar una fuente de energía continua y confiable durante años, lo que es esencial para misiones de larga duración, como la exploración de los planetas exteriores o el envío de sondas a otros sistemas solares. </p>
+                            </div>
+                            
+                            <!-- Columna 3: Botones expandir/reducir -->
+                            <div class="expand-column">
+                                <div class="reduce-btn">[-]</div>
+                                <div class="expand-btn">[+]</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+        <script src="./gsap/gsap.min.js"></script>
+        <script src="./gsap/ScrollTrigger.min.js"></script>
+        <script src="./gsap/ScrollToPlugin.min.js"></script>
+        <!-- Archivos del primer canvas (power) -->
+        <script src="js/block.js"></script>
+        <script src="js/power.js"></script>
+        <!-- Archivos del segundo canvas (options) -->
+        <script src="js/letter.js"></script>
+        <script src="js/options.js"></script>
+        <!-- Resto de scripts -->
+        <script src="js/main.js"></script>
+        <script src="js/cientificos.js"></script> 
+        <script src="js/bento.js"></script>
+        <script src="js/legado.js"></script>
+        
+</body>
+</html>
