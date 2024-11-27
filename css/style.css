@@ -124,7 +124,6 @@ h2 {
 
     span{
         font-size: clamp(40px, 3.9vw, 39px);
-	    letter-spacing:0.025em;
     }
 }
 
@@ -479,12 +478,14 @@ strong{
 
         span{
             font-size: clamp(48px, 4.9vw, 58px);
+            padding-left: 0.1em;
+            letter-spacing: 0.025em;
         }
     }
     h2{
         font-size: 32px;
         span{
-            font-size:31px;
+            font-size:30px;
         }
     }
     .quote-container .texto-cita-pequeña{
@@ -501,6 +502,10 @@ strong{
     .texto-cita-pequeña{
         font-size: 18px;
         line-height: 1em;
+
+        span{
+            font-size: 17px;
+        }
     }
     .modal-img{
         width:100px;
