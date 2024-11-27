@@ -1,45 +1,51 @@
 @import "intro.css";
 @import "cientificos.css";
 @import "bento.css";
-@import "legado.css";
-
+@import "legado.css"; 
 @font-face {
     font-family: 'Mondwest';
-    src: url('../fonts/PPMondwest-Regular.woff2') format('woff2'),
-         url('../fonts/PPMondwest-Regular.woff') format('woff');
+    src: url('/fonts/PPMondwest-Regular.woff2') format('woff2');
     font-weight: normal;
-    font-style: italic;
+    font-style: normal;
+    font-display: block;
 }
-
-@font-face {
-  font-family: 'Tiny'; /* Fuente de Google Fonts */
-  src: url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet');
-  font-display: swap;
-}
-
 
 @font-face {
     font-family: 'Crimson-Italic';
-    src: url('../fonts/CrimsonText-Italic.woff2') format('woff2'),
-         url('../fonts/CrimsonText-Italic.woff') format('woff');
+    src: url('/fonts/CrimsonText-Italic.ttf') format('truetype'),
+         url('/fonts/CrimsonText-Italic.woff') format('woff'),
+         url('/fonts/CrimsonText-Italic.woff2') format('woff2');
     font-weight: 400;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Crimson-Regular';
-    src: url('../fonts/CrimsonText-Regular.woff2') format('woff2'),
-         url('../fonts/CrimsonText-Regular.woff') format('woff');
+    src: url('/fonts/CrimsonText-Regular.ttf') format('truetype'),
+         url('/fonts/CrimsonText-Regular.woff') format('woff'),
+         url('/fonts/CrimsonText-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Crimson-SemiBold';
-    src: url('../fonts/CrimsonText-SemiBold.woff2') format('woff2'),
-         url('../fonts/CrimsonText-SemiBold.woff') format('woff');
+    src: url('/fonts/CrimsonText-SemiBold.ttf') format('truetype'),
+         url('/fonts/CrimsonText-SemiBold.woff') format('woff'),
+         url('/fonts/CrimsonText-SemiBold.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Tiny5';
+    src: url('../fonts/Tiny5.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
 }
 
 :root{
@@ -50,10 +56,10 @@
     --blue-details:#477b9e;
     --gray-details:#666666;
 
-    --main-font:'Crimson-Regular',sans-serif;
-    --main-italic:'Crimson-Italic',sans-serif;
-    --pixel-font:'Mondwest','Tiny',serif;
-    --bold-font:'Crimson-SemiBold',sans-serif;
+    --main-font:'Crimson-Regular', 'Crimson Text', serif;
+    --main-italic:'Crimson-Italic', 'Crimson Text', serif;
+    --pixel-font:'Mondwest', 'Tiny5', 'Courier New', monospace;
+    --bold-font:'Crimson-SemiBold', 'Crimson Text', serif;
 }
 
 html {
@@ -98,6 +104,11 @@ html, body {
     color: var(--main-color);
 }
 /*ESTILOS TITULARES Y PÁRRAFOS*/
+
+span{
+    font-family: var(--pixel-font);
+}
+
 h1,h2,h3,h4{
     font-family: var(--main-italic);
     color:var(--main-color)
@@ -142,9 +153,7 @@ h4{
     }
 }
 
-span{
-    font-family: var(--pixel-font);
-}
+
 
 strong{
     font-family: var(--bold-font);
