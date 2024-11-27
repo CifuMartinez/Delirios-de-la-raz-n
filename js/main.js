@@ -23,7 +23,7 @@ if (!sequenceContainer) {
 
 const frameCount = 22;
 const currentFrame = index => {
-    return `./img/Explosion secuencia/explosion${index + 1}.png`;
+    return `./img/Explosion secuencia/Explosion${index + 1}.png`;
 };
 
 const images = [];
