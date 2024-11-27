@@ -112,6 +112,7 @@ h1 {
     span {
         font-size: clamp(58px, 5.9vw, 78px);
         color: var(--red-details);
+	padding-left: 0.1em;
     }
 }
 
