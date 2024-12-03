@@ -266,4 +266,96 @@
 .expand-column{
         font-size: 20px;
     }
+
+    .subtabs{
+        line-height: 1.2;
+    }
+}
+
+/* Estilos base para subtabs (compartidos) */
+.subtabs {
+    display: flex;
+    gap: 1rem;
+    transition: all 0.4s ease-out;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.subtab {
+    font-size: clamp(16px, 1.4vw, 18px);
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+    white-space: nowrap;
+}
+
+/* TAB ACTIVA */
+.tab.active .subtabs {
+    flex-direction: column;
+    gap: 0.25rem;
+    transform-origin: left top;
+    width: 100%;
+}
+
+.tab.active .subtab {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* TAB DESACTIVADA */
+.tab:not(.active) .subtabs {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.tab:not(.active) .subtab {
+    transform: translateX(-10px);
+    opacity: 0.7;
+}
+
+/* Ajustes responsive */
+@media screen and (max-width: 818px) {
+    .tab.active .subtabs,
+    .tab:not(.active) .subtabs {
+        flex-direction: row;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .subtab {
+        margin-bottom: 0.25rem;
+    }
+
+    .tab.active .title-column,
+    .tab:not(.active) .title-column {
+        width: 100%;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .tab:not(.active) .subtabs,
+    .tab.active .subtabs {
+        flex-direction: column;
+        gap: 0.25rem;
+        width: 100%;
+    }
+
+    .subtab {
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .tab:not(.active) .title-column {
+        width: calc(100% - 40px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .tab.active .subtab,
+    .tab:not(.active) .subtab {
+        transform: none !important; /* Forzar sin transformación en móvil */
+        opacity: 1 !important; /* Mantener opacidad constante */
+        transition: none; /* Deshabilitar transiciones */
+    }
 }

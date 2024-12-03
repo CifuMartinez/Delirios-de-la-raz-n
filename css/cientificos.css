@@ -62,11 +62,17 @@
     align-items: center;
     gap: 0.25rem;
     justify-content: center;
+    position: relative;
+    z-index: 2;
 }
 
 .mouse-animation {
     width: 7vw;
     height: 7vh;
+    display: block;
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
 }
 
 
