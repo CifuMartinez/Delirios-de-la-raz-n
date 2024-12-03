@@ -315,7 +315,6 @@
 .texto-tachado {
     position: relative;
     display: inline-block;
-    transform: rotateY(0deg);
 }
 .tachado {
     position: absolute;
@@ -325,7 +324,6 @@
     width: 50px;
     height: auto;
     z-index: 1;
-    backface-visibility: hidden;
 }
 
 .tachado img {
