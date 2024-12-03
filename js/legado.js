@@ -73,29 +73,43 @@ document.addEventListener('DOMContentLoaded', function() {
             header.addEventListener('click', () => {
                 const isActive = tab.classList.contains('active');
                 const tabHeight = getTabHeight();
+                const isMobile = window.innerWidth <= 768;
                 
                 // Cerrar todas las pestañas con animación
                 tabs.forEach(t => {
                     if (t.classList.contains('active')) {
                         const content = t.querySelector('.tab-content-grid');
                         const textColumn = t.querySelector('.text-column');
+                        const subtabs = t.querySelectorAll('.subtab');
                         
-                        // Primero animamos la opacidad del texto
-                        gsap.to(textColumn, {
-                            opacity: 0,
-                            duration: 0.6,
-                            ease: 'power2.inOut'
-                        });
-                        
-                        // Luego animamos la altura
-                        gsap.to(content, {
-                            height: tabHeight,
-                            duration: 0.4,
-                            ease: 'power4.inOut',
+                        // Timeline para cerrar
+                        const closeTl = gsap.timeline({
                             onComplete: () => {
                                 t.classList.remove('active');
                             }
                         });
+                        
+                        if (!isMobile) {
+                            closeTl.to(subtabs, {
+                                opacity: 0.7,
+                                x: 10,
+                                duration: 0.3,
+                                stagger: 0.1,
+                                ease: 'power2.inOut'
+                            });
+                        }
+                        
+                        closeTl
+                            .to(textColumn, {
+                                opacity: 0,
+                                duration: 0.3,
+                                ease: 'power2.inOut'
+                            }, "<")
+                            .to(content, {
+                                height: tabHeight,
+                                duration: 0.4,
+                                ease: 'power4.inOut'
+                            }, "-=0.2");
                     }
                 });
                 
@@ -104,24 +118,37 @@ document.addEventListener('DOMContentLoaded', function() {
                     tab.classList.add('active');
                     const content = tab.querySelector('.tab-content-grid');
                     const textColumn = tab.querySelector('.text-column');
+                    const subtabs = tab.querySelectorAll('.subtab');
                     
-                    // Configurar estados iniciales
+                    // Calcular la altura final antes de la animación
+                    gsap.set(content, { height: 'auto' });
+                    const autoHeight = content.offsetHeight;
                     gsap.set(content, { height: tabHeight });
-                    gsap.set(textColumn, { opacity: 0 });
                     
-                    // Timeline para coordinar las animaciones
-                    const tl = gsap.timeline();
+                    // Timeline para abrir
+                    const openTl = gsap.timeline();
                     
-                    tl.to(content, {
-                        height: 'auto',
-                        duration: 0.6,
-                        ease: 'power2.out'
-                    })
-                    .to(textColumn, {
-                        opacity: 1,
-                        duration: 0.4,
-                        ease: 'power2.out'
-                    }, "-=0.6");
+                    openTl
+                        .to(content, {
+                            height: autoHeight,
+                            duration: 0.6,
+                            ease: 'power2.out'
+                        })
+                        .to(textColumn, {
+                            opacity: 1,
+                            duration: 0.4,
+                            ease: 'power2.out'
+                        }, "-=0.4");
+                    
+                    if (!isMobile) {
+                        openTl.to(subtabs, {
+                            opacity: 1,
+                            x: 0,
+                            duration: 0.3,
+                            stagger: 0.05,
+                            ease: 'power2.out'
+                        }, "-=0.3");
+                    }
                 }
             });
         }

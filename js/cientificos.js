@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // La grid y las indicaciones tienen opacidad y scale inicial
-    gsap.set([scientistElements.scientistsGrid, scientistElements.indicaciones], {
+    gsap.set([scientistElements.indicaciones, scientistElements.scientistsGrid], {
         opacity: 0,
         scale: 0.95
     });
@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     stagger: 0.4,
                     ease: "power2.out"
                 })
-                // Animar grid e indicaciones inmediatamente después
-                .to([scientistElements.scientistsGrid, scientistElements.indicaciones], {
+                // Animar grid, indicaciones y mouse-animation juntos
+                .to([scientistElements.scientistsGrid, scientistElements.indicaciones, '.mouse-animation'], {
                     opacity: 1,
                     scale: 1,
                     duration: 0.4,
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
                         }
                     }
-                }, "<+0.8"); 
+                }, "<+0.4"); 
             }
         }
     });
