@@ -478,8 +478,6 @@ strong{
 
         span{
             font-size: clamp(48px, 4.9vw, 58px);
-            padding-left: 0.1em;
-            letter-spacing: 0.025em;
         }
     }
     h2{
