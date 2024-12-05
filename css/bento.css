@@ -315,6 +315,8 @@
 .texto-tachado {
     position: relative;
     display: inline-block;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
 }
 .tachado {
     position: absolute;
@@ -324,6 +326,7 @@
     width: 50px;
     height: auto;
     z-index: 1;
+    backface-visibility: hidden;
 }
 
 .tachado img {
@@ -649,6 +652,11 @@
 .card-back .texto-pequeño::-webkit-scrollbar {
     width: 0 !important;
     display: none !important;
+}
+
+/* Asegurar que el back no hereda el tachado */
+.card-back .texto-tachado {
+    display: none;
 }
 
 
